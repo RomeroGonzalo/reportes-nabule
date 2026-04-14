@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reporte Stock — NABULE SA · Semana 30/03–05/04/2026</title>
+<title>Reporte Stock — NABULE SA · Semana 06/04–12/04/2026</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
@@ -16,93 +16,26 @@
   --text: #1A1917;
   --text2: #6B6860;
   --text3: #9B998F;
-  --green: #2D6A1F;
-  --green-bg: #EAF3DE;
-  --green-mid: #639922;
-  --amber: #92500A;
-  --amber-bg: #FDF0DA;
-  --amber-mid: #C47F1A;
-  --red: #961F1F;
-  --red-bg: #FDEAEA;
-  --red-mid: #D94040;
-  --blue: #0F4F8A;
-  --blue-bg: #E8F2FC;
-  --blue-mid: #2B7CC4;
-  --radius: 12px;
-  --radius-sm: 8px;
+  --green: #2D6A1F; --green-bg: #EAF3DE; --green-mid: #639922;
+  --amber: #92500A; --amber-bg: #FDF0DA; --amber-mid: #C47F1A;
+  --red: #961F1F; --red-bg: #FDEAEA; --red-mid: #D94040;
+  --blue: #0F4F8A; --blue-bg: #E8F2FC; --blue-mid: #2B7CC4;
+  --radius: 12px; --radius-sm: 8px;
 }
-
 * { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.5; min-height: 100vh; }
 
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  font-size: 14px;
-  line-height: 1.5;
-  min-height: 100vh;
-}
+.header { background: var(--text); color: white; padding: 28px 40px; display: flex; justify-content: space-between; align-items: flex-end; }
+.header-left h1 { font-size: 22px; font-weight: 600; letter-spacing: -0.3px; margin-bottom: 4px; }
+.header-left p { font-size: 12px; color: rgba(255,255,255,0.5); font-family: 'DM Mono', monospace; letter-spacing: 0.04em; }
+.header-right { text-align: right; font-size: 11px; color: rgba(255,255,255,0.45); font-family: 'DM Mono', monospace; }
+.header-right strong { display: block; font-size: 13px; color: rgba(255,255,255,0.75); font-weight: 500; margin-bottom: 2px; }
 
-/* HEADER */
-.header {
-  background: var(--text);
-  color: white;
-  padding: 28px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-.header-left h1 {
-  font-size: 22px;
-  font-weight: 600;
-  letter-spacing: -0.3px;
-  margin-bottom: 4px;
-}
-.header-left p {
-  font-size: 12px;
-  color: rgba(255,255,255,0.5);
-  font-family: 'DM Mono', monospace;
-  letter-spacing: 0.04em;
-}
-.header-right {
-  text-align: right;
-  font-size: 11px;
-  color: rgba(255,255,255,0.45);
-  font-family: 'DM Mono', monospace;
-}
-.header-right strong {
-  display: block;
-  font-size: 13px;
-  color: rgba(255,255,255,0.75);
-  font-weight: 500;
-  margin-bottom: 2px;
-}
-
-/* LAYOUT */
 .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px 60px; }
 
-/* KPI STRIP */
-.kpi-strip {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 10px;
-  margin-bottom: 28px;
-}
-.kpi-card {
-  background: var(--surface);
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  padding: 16px 14px;
-  position: relative;
-  overflow: hidden;
-}
-.kpi-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--accent, #ccc);
-}
+.kpi-strip { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-bottom: 28px; }
+.kpi-card { background: var(--surface); border-radius: var(--radius-sm); border: 1px solid var(--border); padding: 16px 14px; position: relative; overflow: hidden; }
+.kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent, #ccc); }
 .kpi-card.good { --accent: var(--green-mid); }
 .kpi-card.warn { --accent: var(--amber-mid); }
 .kpi-card.info { --accent: var(--blue-mid); }
@@ -110,125 +43,45 @@ body {
 .kpi-label { font-size: 10px; font-weight: 500; color: var(--text3); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 6px; }
 .kpi-value { font-size: 20px; font-weight: 600; color: var(--text); letter-spacing: -0.5px; line-height: 1.1; }
 .kpi-sub { font-size: 10px; color: var(--text3); margin-top: 4px; }
+.kpi-delta { font-size: 10px; font-weight: 600; margin-top: 4px; }
+.delta-up { color: var(--green); }
+.delta-down { color: var(--red); }
 
-/* SECTION */
 .section { margin-bottom: 24px; }
-.section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-.section-title {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text3);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
+.section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.section-title { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; }
 
-/* GRID */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
 
-/* CARD */
-.card {
-  background: var(--surface);
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  overflow: hidden;
-}
-.card-header {
-  padding: 14px 18px;
-  border-bottom: 1px solid var(--border);
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--text);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+.card { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
+.card-header { padding: 14px 18px; border-bottom: 1px solid var(--border); font-size: 12px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
 .card-body { padding: 0; }
 
-/* NAV TABS */
-.nav-tabs {
-  display: flex;
-  gap: 4px;
-  background: var(--surface2);
-  border-radius: 10px;
-  padding: 4px;
-  margin-bottom: 16px;
-  width: fit-content;
-}
-.nav-tab {
-  font-size: 12px;
-  font-weight: 500;
-  padding: 6px 16px;
-  border-radius: 7px;
-  border: none;
-  background: transparent;
-  color: var(--text2);
-  cursor: pointer;
-  transition: all 0.15s;
-  font-family: 'DM Sans', sans-serif;
-}
-.nav-tab.active {
-  background: var(--surface);
-  color: var(--text);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-}
+.nav-tabs { display: flex; gap: 4px; background: var(--surface2); border-radius: 10px; padding: 4px; margin-bottom: 16px; width: fit-content; flex-wrap: wrap; }
+.nav-tab { font-size: 12px; font-weight: 500; padding: 6px 16px; border-radius: 7px; border: none; background: transparent; color: var(--text2); cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
+.nav-tab.active { background: var(--surface); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
 .pane { display: none; }
 .pane.active { display: block; }
 
-/* TABLE */
 .tbl-wrap { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; font-size: 12px; }
-th {
-  text-align: left;
-  padding: 8px 12px;
-  font-size: 10px;
-  font-weight: 600;
-  color: var(--text3);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  border-bottom: 1px solid var(--border);
-  white-space: nowrap;
-  background: var(--surface2);
-}
-td {
-  padding: 9px 12px;
-  border-bottom: 1px solid var(--border);
-  color: var(--text);
-  vertical-align: middle;
-}
+th { text-align: left; padding: 8px 12px; font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid var(--border); white-space: nowrap; background: var(--surface2); }
+td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: middle; }
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: var(--bg); }
 .num { text-align: right; font-family: 'DM Mono', monospace; font-size: 11px; }
 .bold { font-weight: 500; }
 .muted { color: var(--text3); font-size: 11px; }
 
-/* BADGE */
-.badge {
-  display: inline-block;
-  font-size: 10px;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 20px;
-  white-space: nowrap;
-}
+.badge { display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 20px; white-space: nowrap; }
 .b-green { background: var(--green-bg); color: var(--green); }
 .b-amber { background: var(--amber-bg); color: var(--amber); }
 .b-red { background: var(--red-bg); color: var(--red); }
 .b-blue { background: var(--blue-bg); color: var(--blue); }
 .b-gray { background: var(--surface2); color: var(--text2); }
 
-/* ALERT BOX */
-.alert {
-  border-radius: var(--radius-sm);
-  padding: 14px 16px;
-  margin-bottom: 10px;
-  border-left: 3px solid;
-}
+.alert { border-radius: var(--radius-sm); padding: 14px 16px; margin-bottom: 10px; border-left: 3px solid; }
 .alert-red { background: var(--red-bg); border-color: var(--red-mid); }
 .alert-amber { background: var(--amber-bg); border-color: var(--amber-mid); }
 .alert-blue { background: var(--blue-bg); border-color: var(--blue-mid); }
@@ -240,7 +93,6 @@ tr:hover td { background: var(--bg); }
 .alert-green .alert-title { color: var(--green); }
 .alert-text { font-size: 12px; color: var(--text2); line-height: 1.5; }
 
-/* RANK BAR */
 .rank-item { display: flex; align-items: center; gap: 10px; padding: 8px 18px; border-bottom: 1px solid var(--border); }
 .rank-item:last-child { border-bottom: none; }
 .rank-num { width: 18px; font-size: 11px; color: var(--text3); font-family: 'DM Mono', monospace; flex-shrink: 0; }
@@ -252,22 +104,10 @@ tr:hover td { background: var(--bg); }
 .rank-bar-fill { height: 100%; border-radius: 3px; background: var(--blue-mid); }
 .rank-val { width: 60px; text-align: right; font-family: 'DM Mono', monospace; font-size: 11px; flex-shrink: 0; font-weight: 500; }
 
-/* RUBRO TABLE SPECIAL */
 .rubro-margen-bar { width: 50px; height: 6px; background: var(--bg); border-radius: 3px; overflow: hidden; display: inline-block; vertical-align: middle; margin-right: 4px; }
 .rubro-margen-fill { height: 100%; border-radius: 3px; }
 
-/* FOOTER */
-.footer {
-  background: var(--text);
-  color: rgba(255,255,255,0.35);
-  text-align: center;
-  padding: 16px;
-  font-size: 11px;
-  font-family: 'DM Mono', monospace;
-  letter-spacing: 0.04em;
-}
-
-/* DOTS */
+.footer { background: var(--text); color: rgba(255,255,255,0.35); text-align: center; padding: 16px; font-size: 11px; font-family: 'DM Mono', monospace; letter-spacing: 0.04em; }
 .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 
 @media (max-width: 900px) {
@@ -283,65 +123,60 @@ tr:hover td { background: var(--bg); }
 <div class="header">
   <div class="header-left">
     <h1>Análisis de Performance de Stock</h1>
-    <p>NABULE SA · Semana 30/03 → 05/04/2026</p>
+    <p>NABULE SA · Semana 06/04 → 12/04/2026 · Semana 2</p>
   </div>
   <div class="header-right">
-    <strong>Generado por análisis semanal</strong>
+    <strong>Reporte semanal</strong>
     Confidencial · Uso interno
   </div>
 </div>
 
 <div class="container">
 
-  <!-- KPIs -->
   <div class="section">
-    <div class="section-header"><span class="section-title">Resumen ejecutivo</span></div>
+    <div class="section-header"><span class="section-title">Resumen ejecutivo — comparativa vs semana anterior</span></div>
     <div class="kpi-strip">
       <div class="kpi-card good">
         <div class="kpi-label">Ingresos</div>
-        <div class="kpi-value">$4,69M</div>
-        <div class="kpi-sub">semana</div>
+        <div class="kpi-value">$15,32M</div>
+        <div class="kpi-delta delta-up">▲ +226% vs sem. ant.</div>
       </div>
       <div class="kpi-card good">
         <div class="kpi-label">Ganancia bruta</div>
-        <div class="kpi-value">$1,61M</div>
-        <div class="kpi-sub">Margen 34,2%</div>
+        <div class="kpi-value">$5,32M</div>
+        <div class="kpi-delta delta-up">▲ +231% vs sem. ant.</div>
+      </div>
+      <div class="kpi-card good">
+        <div class="kpi-label">Margen</div>
+        <div class="kpi-value">34,7%</div>
+        <div class="kpi-delta delta-up">▲ +0,5pp vs sem. ant.</div>
+      </div>
+      <div class="kpi-card info">
+        <div class="kpi-label">Unidades vendidas</div>
+        <div class="kpi-value">1.481</div>
+        <div class="kpi-delta delta-up">▲ +190% vs sem. ant.</div>
       </div>
       <div class="kpi-card info">
         <div class="kpi-label">Valor stock</div>
-        <div class="kpi-value">$33,5M</div>
-        <div class="kpi-sub">470 productos</div>
-      </div>
-      <div class="kpi-card info">
-        <div class="kpi-label">Inversión compras</div>
-        <div class="kpi-value">$3,34M</div>
-        <div class="kpi-sub">5 líneas</div>
+        <div class="kpi-value">$41,2M</div>
+        <div class="kpi-delta delta-up">▲ +23% vs sem. ant.</div>
       </div>
       <div class="kpi-card warn">
         <div class="kpi-label">Sin movimiento</div>
-        <div class="kpi-value">353</div>
-        <div class="kpi-sub">con stock disponible</div>
-      </div>
-      <div class="kpi-card danger">
-        <div class="kpi-label">Tasa de activación</div>
-        <div class="kpi-value">27%</div>
-        <div class="kpi-sub">productos vendiendo</div>
+        <div class="kpi-value">341</div>
+        <div class="kpi-delta delta-up">▼ 12 menos que sem. ant.</div>
       </div>
     </div>
   </div>
 
-  <!-- CHARTS ROW -->
+  <!-- TENDENCIA HISTÓRICA -->
   <div class="section">
-    <div class="grid-2" style="margin-bottom:16px;">
-
+    <div class="grid-2">
       <div class="card">
-        <div class="card-header">
-          <span class="dot" style="background:#2B7CC4"></span>
-          Ingresos y ganancia por rubro
-        </div>
+        <div class="card-header"><span class="dot" style="background:#639922"></span> Evolución ingresos y ganancia</div>
         <div class="card-body" style="padding:16px;">
-          <div style="position:relative;height:260px;">
-            <canvas id="rubroChart" role="img" aria-label="Barras de ingresos y ganancia por rubro"></canvas>
+          <div style="position:relative;height:200px;">
+            <canvas id="tendenciaChart" role="img" aria-label="Evolución de ingresos y ganancia semana 1 y 2"></canvas>
           </div>
           <div style="display:flex;gap:16px;margin-top:10px;font-size:11px;color:var(--text3);">
             <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#2B7CC4;margin-right:4px;"></span>Ingresos</span>
@@ -351,21 +186,17 @@ tr:hover td { background: var(--bg); }
       </div>
 
       <div class="card">
-        <div class="card-header">
-          <span class="dot" style="background:#C47F1A"></span>
-          Distribución del valor de stock
-        </div>
+        <div class="card-header"><span class="dot" style="background:#2B7CC4"></span> Ingresos por rubro — semana 2</div>
         <div class="card-body" style="padding:16px;">
-          <div style="position:relative;height:260px;">
-            <canvas id="stockPie" role="img" aria-label="Torta de distribución de valor de stock por rubro"></canvas>
+          <div style="position:relative;height:200px;">
+            <canvas id="rubroChart" role="img" aria-label="Ingresos por rubro semana 2"></canvas>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 
-  <!-- TABS SECTION -->
+  <!-- TABS -->
   <div class="section">
     <div class="nav-tabs">
       <button class="nav-tab active" onclick="showTab('ventas', this)">Top ventas</button>
@@ -375,95 +206,57 @@ tr:hover td { background: var(--bg); }
       <button class="nav-tab" onclick="showTab('alertas', this)">Alertas</button>
     </div>
 
-    <!-- TOP VENTAS -->
     <div id="pane-ventas" class="pane active">
       <div class="card">
         <div class="card-header">Top 15 productos por unidades vendidas</div>
-        <div class="card-body">
-          <div id="rank-ventas"></div>
-        </div>
+        <div class="card-body"><div id="rank-ventas"></div></div>
       </div>
     </div>
 
-    <!-- RUBROS -->
     <div id="pane-rubros" class="pane">
       <div class="card">
         <div class="card-header">Performance por rubro</div>
         <div class="tbl-wrap">
           <table>
-            <thead>
-              <tr>
-                <th>Rubro</th>
-                <th class="num">Und. vendidas</th>
-                <th class="num">Ingresos</th>
-                <th class="num">Ganancia</th>
-                <th class="num">Margen</th>
-                <th class="num">Stock und.</th>
-                <th class="num">Valor stock</th>
-                <th>Estado</th>
-              </tr>
-            </thead>
+            <thead><tr><th>Rubro</th><th class="num">Und. vendidas</th><th class="num">Ingresos</th><th class="num">Ganancia</th><th class="num">Margen</th><th class="num">Stock und.</th><th class="num">Valor stock</th><th>Estado</th></tr></thead>
             <tbody id="rubros-body"></tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <!-- COMPRAS -->
     <div id="pane-compras" class="pane">
       <div class="card">
-        <div class="card-header">Compras realizadas esta semana — $3.342.600 invertidos</div>
+        <div class="card-header">Compras realizadas esta semana — $13.128.200 invertidos (26 líneas)</div>
         <div class="tbl-wrap">
           <table>
-            <thead>
-              <tr>
-                <th>Producto</th>
-                <th>Rubro</th>
-                <th class="num">Und. compradas</th>
-                <th class="num">Und. vendidas</th>
-                <th class="num">Stock final</th>
-                <th class="num">Inversión</th>
-                <th>Señal</th>
-              </tr>
-            </thead>
+            <thead><tr><th>Producto</th><th>Rubro</th><th class="num">Und. compradas</th><th class="num">Costo unit.</th><th class="num">Total</th><th>Señal</th></tr></thead>
             <tbody id="compras-body"></tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <!-- SIN MOV -->
     <div id="pane-sinmov" class="pane">
       <div class="card">
-        <div class="card-header">Top 20 productos sin venta · mayor capital inmovilizado</div>
+        <div class="card-header">Top 20 por valor inmovilizado · de 341 productos sin movimiento en total</div>
         <div class="tbl-wrap">
           <table>
-            <thead>
-              <tr>
-                <th>Producto</th>
-                <th>Rubro</th>
-                <th>Proveedor</th>
-                <th class="num">Stock</th>
-                <th class="num">Costo unit.</th>
-                <th class="num">Valor inmov.</th>
-                <th>Prioridad</th>
-              </tr>
-            </thead>
+            <thead><tr><th>Producto</th><th>Rubro</th><th>Proveedor</th><th class="num">Stock</th><th class="num">Costo unit.</th><th class="num">Valor inmov.</th><th>Prioridad</th></tr></thead>
             <tbody id="sinmov-body"></tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <!-- ALERTAS -->
     <div id="pane-alertas" class="pane">
       <div id="alertas-body"></div>
     </div>
-
   </div>
+
 </div>
 
-<div class="footer">NABULE SA · Análisis de stock semana 30/03–05/04/2026 · Confidencial</div>
+<div class="footer">NABULE SA · Análisis de stock semana 06/04–12/04/2026 · Semana 2 · Confidencial</div>
 
 <script>
 function showTab(id, btn) {
@@ -472,92 +265,105 @@ function showTab(id, btn) {
   document.getElementById('pane-' + id).classList.add('active');
   btn.classList.add('active');
 }
-
 function fmt(n) { return '$' + Math.round(n).toLocaleString('es-AR'); }
 function fmtK(n) { return n >= 1000000 ? '$' + (n/1000000).toFixed(2) + 'M' : '$' + Math.round(n/1000) + 'K'; }
 
-// ---- DATA ----
+// DATA
 const rubros = [
-  {r:'REMERAS ML', v:139, ing:703251, gan:258358, stock:823, vs:2730041},
-  {r:'REMERAS MC', v:83, ing:596650, gan:242079, stock:892, vs:3018279},
-  {r:'BUZOS', v:31, ing:525780, gan:168020, stock:346, vs:2816031},
-  {r:'CALZAS', v:62, ing:337034, gan:123968, stock:747, vs:3038938},
-  {r:'CANGUROS', v:22, ing:343720, gan:113863, stock:193, vs:1532724},
-  {r:'JEANS', v:19, ing:344550, gan:109062, stock:234, vs:2278123},
-  {r:'CAMPERAS', v:13, ing:258500, gan:73770, stock:72, vs:977291},
-  {r:'BABUCHAS', v:17, ing:185705, gan:61055, stock:176, vs:1130447},
-  {r:'CONJUNTOS', v:9, ing:165935, gan:64003, stock:234, vs:1988818},
-  {r:'PANTALONES', v:11, ing:150450, gan:45114, stock:143, vs:1129206},
-  {r:'CHOMBAS MC', v:14, ing:142600, gan:45725, stock:182, vs:985600},
-  {r:'BERMUDAS', v:9, ing:95985, gan:34014, stock:323, vs:1566923},
-  {r:'SHORTS', v:9, ing:77700, gan:30241, stock:502, vs:1919636},
-  {r:'CAMISAS MC', v:5, ing:74250, gan:33631, stock:258, vs:1476000},
-  {r:'PECHERAS', v:0, ing:0, gan:0, stock:633, vs:1757608},
-  {r:'MUSCULOSAS', v:5, ing:26000, gan:6599, stock:313, vs:895249},
-  {r:'SHORTS DE BAÑO', v:0, ing:0, gan:0, stock:176, vs:628500},
+  {r:'REMERAS ML', v:307, ing:1751878, gan:596897, stock:624, vs:2171390},
+  {r:'CONJUNTOS', v:59, ing:1227340, gan:438826, stock:174, vs:1343368},
+  {r:'CALZAS', v:194, ing:1225418, gan:442343, stock:556, vs:2404522},
+  {r:'PANTALONES', v:91, ing:1017715, gan:340996, stock:213, vs:1496118},
+  {r:'BUZOS', v:74, ing:957950, gan:273518, stock:359, vs:2857367},
+  {r:'CANGUROS', v:66, ing:934345, gan:321003, stock:204, vs:1608255},
+  {r:'BABUCHAS', v:72, ing:848330, gan:277010, stock:115, vs:813775},
+  {r:'JEANS', v:34, ing:630965, gan:215322, stock:242, vs:2372956},
+  {r:'CAMPERAS', v:23, ing:460690, gan:144128, stock:52, vs:752691},
+  {r:'BAGGYS', v:24, ing:382825, gan:132311, stock:120, vs:1125249},
+  {r:'REMERAS MC', v:50, ing:378250, gan:142318, stock:839, vs:2830289},
+  {r:'POLERAS', v:19, ing:163000, gan:50122, stock:89, vs:428665},
+  {r:'CHOMBAS MC', v:13, ing:150440, gan:62769, stock:168, vs:905600},
+  {r:'CAMISAS MC', v:8, ing:97800, gan:45089, stock:251, vs:1440000},
+  {r:'PALAZZOS', v:7, ing:81000, gan:26483, stock:188, vs:1171609},
+  {r:'SWEATERS', v:5, ing:63350, gan:22426, stock:95, vs:553369},
+  {r:'JOGGERS', v:4, ing:75000, gan:20473, stock:11, vs:120560},
+  {r:'PECHERAS', v:3, ing:19000, gan:8048, stock:630, vs:1748108},
+  {r:'BERMUDAS', v:1, ing:18000, gan:7500, stock:324, vs:1577423},
+  {r:'SHORTS DE BAÑO', v:1, ing:8000, gan:2532, stock:175, vs:624500},
 ];
 
 const topVentas = [
-  {prod:'Manga Larga Yoel Nena', rub:'REMERAS ML', v:39, sf:75, ing:157337, gan:56795},
-  {prod:'ML Lucio Nene Doble Estampa', rub:'REMERAS ML', v:38, sf:86, ing:232220, gan:87248},
-  {prod:'Calza Sonia Estampada Termica', rub:'CALZAS', v:32, sf:113, ing:167384, gan:60398},
-  {prod:'Remera ML Yoel Personajes', rub:'REMERAS ML', v:26, sf:111, ing:111069, gan:39846},
-  {prod:'Remera MC Idrogeno Varias', rub:'REMERAS MC', v:24, sf:208, ing:286000, gan:113239},
-  {prod:'ML Sonia Termica Niño', rub:'REMERAS ML', v:23, sf:125, ing:109400, gan:36386},
-  {prod:'MC Jimmy Colegial Algodon Peinado', rub:'REMERAS MC', v:17, sf:35, ing:69250, gan:33763},
-  {prod:'Buzos Aki Varios', rub:'BUZOS', v:15, sf:122, ing:277630, gan:92757},
-  {prod:'Jeans Idrogeno Varios', rub:'JEANS', v:15, sf:177, ing:266700, gan:84874},
-  {prod:'Calza Sonia Termica Cintura', rub:'CALZAS', v:14, sf:135, ing:69850, gan:27887},
-  {prod:'Chomba Idrogeno MC', rub:'CHOMBAS MC', v:10, sf:133, ing:111600, gan:39020},
-  {prod:'Canguro Idrogeno Hombre', rub:'CANGUROS', v:10, sf:56, ing:188000, gan:60754},
-  {prod:'Calza Sonia Termica Lisa', rub:'CALZAS', v:10, sf:205, ing:46500, gan:14772},
-  {prod:'Pantalon Juna Cargo', rub:'PANTALONES', v:10, sf:67, ing:127010, gan:37136},
-  {prod:'Babucha Juna Raya', rub:'BABUCHAS', v:7, sf:80, ing:83070, gan:28811},
+  {prod:'ML Sonia Termica Niño', rub:'REMERAS ML', v:102, sf:32, ing:476650, gan:137957},
+  {prod:'Conjunto Yoel Colegial Acetato', rub:'CONJUNTOS', v:57, sf:50, ing:1200540, gan:429862},
+  {prod:'Babucha Juna Raya', rub:'BABUCHAS', v:55, sf:34, ing:665665, gan:212801},
+  {prod:'Calza Sonia Estampada Termica', rub:'CALZAS', v:65, sf:55, ing:344176, gan:122229},
+  {prod:'Camiseta Sonia Termica Adulto', rub:'REMERAS ML', v:53, sf:91, ing:398200, gan:138158},
+  {prod:'ML Jimmy Algodon Procesado', rub:'REMERAS ML', v:60, sf:38, ing:385770, gan:154062},
+  {prod:'Pantalon Marcos Deportivo Hombre', rub:'PANTALONES', v:45, sf:32, ing:512640, gan:207769},
+  {prod:'Pantalon Juna Cargo', rub:'PANTALONES', v:44, sf:26, ing:534235, gan:190209},
+  {prod:'Calza Sonia Termica Cintura', rub:'CALZAS', v:45, sf:90, ing:236803, gan:89786},
+  {prod:'ML Lucio Nene Doble Estampa', rub:'REMERAS ML', v:43, sf:42, ing:284935, gan:107870},
+  {prod:'Buzo Yoel Darlon', rub:'BUZOS', v:38, sf:45, ing:442680, gan:134394},
+  {prod:'Campera Jimmy Plush', rub:'CAMPERAS', v:38, sf:62, ing:499450, gan:181769},
+  {prod:'Manga Larga Yoel Nena', rub:'REMERAS ML', v:36, sf:39, ing:146738, gan:55294},
+  {prod:'Pantalon Marcos Deportivo', rub:'PANTALONES', v:35, sf:44, ing:295965, gan:98254},
+  {prod:'Palazzo Marcela Darlon Rayas', rub:'PALAZZOS', v:32, sf:69, ing:366660, gan:139096},
 ];
 
 const compras = [
-  {prod:'Conjunto Yoel Colegial Acetato', rub:'CONJUNTOS', comp:105, vend:5, sf:107, inv:1155000, sig:'Ya vendiendo', sigc:'b-green'},
-  {prod:'Babucha Juna Raya', rub:'BABUCHAS', comp:80, vend:7, sf:80, inv:520000, sig:'Ya vendiendo', sigc:'b-green'},
-  {prod:'Pantalon Juna Cargo', rub:'PANTALONES', comp:80, vend:10, sf:67, inv:528000, sig:'Ya vendiendo', sigc:'b-green'},
-  {prod:'Canguro Juna Rayado', rub:'CANGUROS', comp:77, vend:0, sf:77, inv:569800, sig:'Sin venta aún', sigc:'b-red'},
-  {prod:'Baggy Juna Friza', rub:'BAGGYS', comp:77, vend:4, sf:73, inv:569800, sig:'Movimiento leve', sigc:'b-amber'},
+  {prod:'Conjunto Yoel Plush Volados', rub:'CONJUNTOS', comp:100, cu:12500, total:1250000, sig:'Nueva línea', sigc:'b-blue'},
+  {prod:'Canguro Jimmy Rayas Brillo', rub:'CANGUROS', comp:100, cu:6300, total:630000, sig:'Ya vendiendo', sigc:'b-green'},
+  {prod:'ML Jimmy Gastada', rub:'REMERAS ML', comp:100, cu:3400, total:340000, sig:'Ya vendiendo', sigc:'b-green'},
+  {prod:'ML Jimmy Algodon Procesado', rub:'REMERAS ML', comp:100, cu:3400, total:340000, sig:'Ya vendiendo', sigc:'b-green'},
+  {prod:'Babucha Roger Algodon', rub:'BABUCHAS', comp:100, cu:6500, total:650000, sig:'Nueva línea', sigc:'b-blue'},
+  {prod:'Palazzo Cesar Darlon', rub:'PALAZZOS', comp:100, cu:6000, total:600000, sig:'Vendiendo', sigc:'b-green'},
+  {prod:'Sweater Osmar Basico', rub:'SWEATERS', comp:101, cu:8200, total:828200, sig:'Nueva línea', sigc:'b-blue'},
+  {prod:'Campera Jimmy Plush', rub:'CAMPERAS', comp:100, cu:6900, total:690000, sig:'Ya vendiendo', sigc:'b-green'},
+  {prod:'Pantalon Marcos Deportivo Hombre', rub:'PANTALONES', comp:80, cu:5800, total:464000, sig:'Ya vendiendo', sigc:'b-green'},
+  {prod:'Jeans Carsami Baggy Dama', rub:'JEANS', comp:51, cu:12800, total:652800, sig:'Nueva línea', sigc:'b-blue'},
+  {prod:'Buzo Chambi Darlon', rub:'BUZOS', comp:81, cu:7600, total:615600, sig:'Nueva línea', sigc:'b-blue'},
+  {prod:'Campera Maribel Darlon Rayada', rub:'CAMPERAS', comp:60, cu:10000, total:600000, sig:'Nueva línea', sigc:'b-blue'},
+  {prod:'Palazzo Marcela Darlon Rayas', rub:'PALAZZOS', comp:101, cu:5800, total:585800, sig:'Ya vendiendo', sigc:'b-green'},
+  {prod:'Pantalon Marcos Darlon 3 Tiras', rub:'PALAZZOS', comp:80, cu:8000, total:640000, sig:'Nueva línea', sigc:'b-blue'},
+  {prod:'Canguro Jimmy Gastado', rub:'CANGUROS', comp:100, cu:5700, total:570000, sig:'Ya vendiendo', sigc:'b-green'},
 ];
 
 const sinVenta = [
-  {prod:'Short Idrogeno', rub:'SHORTS DE BAÑO', prov:'IDROGENO', sf:125, cu:4000, vi:500000},
+  {prod:'Bermuda Moy Oferta', rub:'BERMUDAS', prov:'MOY', sf:213, cu:3500, vi:745500},
   {prod:'Camisa Idrogeno MC Fibrana', rub:'CAMISAS MC', prov:'IDROGENO', sf:63, cu:6000, vi:378000},
   {prod:'Pechera Antonio Nena', rub:'PECHERAS', prov:'ANTONIO', sf:86, cu:4000, vi:344000},
-  {prod:'Babucha Aki Nena Elastico', rub:'BABUCHAS', prov:'AKI', sf:34, cu:10000, vi:340000},
   {prod:'Short Tauro Jeans', rub:'SHORTS', prov:'TAURO G', sf:43, cu:7500, vi:322500},
   {prod:'Pechera Economica Oferta', rub:'PECHERAS', prov:'SALDOS', sf:145, cu:1944, vi:281880},
-  {prod:'Short Marcelino Baño', rub:'SHORTS', prov:'MARCELINO', sf:78, cu:3500, vi:273000},
-  {prod:'Remera ML Rosales Termica', rub:'REMERAS ML', prov:'ROSALES', sf:49, cu:5556, vi:272244},
+  {prod:'Short Marcelino Baño Estampado', rub:'SHORTS', prov:'MARCELINO', sf:78, cu:3500, vi:273000},
   {prod:'Pechera Antonio Colegial', rub:'PECHERAS', prov:'ANTONIO', sf:64, cu:4000, vi:256000},
   {prod:'Pechera Arciel Talle 6', rub:'PECHERAS', prov:'SALDOS', sf:111, cu:2222, vi:246642},
   {prod:'Cancan Oferta (Medias)', rub:'MEDIAS', prov:'SALDOS', sf:221, cu:1000, vi:221000},
   {prod:'Musculosa Jimmy Vintage Moño', rub:'MUSCULOSAS', prov:'JIMMY', sf:58, cu:3500, vi:203000},
-  {prod:'Buzo Oferta', rub:'BUZOS', prov:'NABULE', sf:45, cu:4444, vi:199980},
+  {prod:'Short Qhuana Jeans Playero', rub:'SHORTS', prov:'QHUANA', sf:27, cu:7500, vi:202500},
   {prod:'Calza Martin Bolsillo Celu', rub:'CALZAS', prov:'MARTIN', sf:17, cu:11700, vi:198900},
-  {prod:'Short Qhuana Jeans Playero', rub:'SHORTS', prov:'QHUANA', sf:26, cu:7500, vi:195000},
   {prod:'Short Luis Colegial', rub:'SHORTS', prov:'LUIS', sf:82, cu:2222, vi:182204},
-  {prod:'Buzo Yoel Doble Estampa', rub:'BUZOS', prov:'YOEL', sf:29, cu:6111, vi:177219},
-  {prod:'Calza Cristina Lycra Lisa', rub:'CALZAS', prov:'CRISTINA', sf:24, cu:6000, vi:144000},
-  {prod:'Remera ML Rosales Termica Hombre', rub:'REMERAS ML', prov:'ROSALES', sf:25, cu:5556, vi:138900},
+  {prod:'Short Pollera Javier Strass', rub:'SHORT POLLERA', prov:'JAVIER', sf:22, cu:8000, vi:176000},
+  {prod:'Bermuda Javier Carpintera Gabardina', rub:'BERMUDAS', prov:'JAVIER', sf:20, cu:8500, vi:170000},
+  {prod:'Buzo Idrogeno Desgastado', rub:'BUZOS', prov:'IDROGENO', sf:16, cu:10000, vi:160000},
+  {prod:'Chomba Jimmy Colegial', rub:'CHOMBAS MC', prov:'JIMMY', sf:42, cu:3800, vi:159600},
+  {prod:'Conjunto Jimmy Brillos', rub:'CONJUNTOS', prov:'JIMMY', sf:26, cu:5500, vi:143000},
   {prod:'Short Javier Strass', rub:'SHORTS', prov:'JAVIER', sf:19, cu:7200, vi:136800},
+  {prod:'Buzo Aki Elastico Juvenil', rub:'BUZOS', prov:'AKI', sf:13, cu:10000, vi:130000},
 ];
 
 const alertas = [
-  {tipo:'red', titulo:'Pecheras — $1.757.608 inmovilizados, cero ventas', texto:'14 modelos con 633 unidades sin ninguna venta durante la semana. Probable producto fuera de temporada o con precio fuera de mercado. Acción recomendada: oferta agresiva, bundle con otros productos o liquidación inmediata.'},
-  {tipo:'red', titulo:'Shorts de baño — temporada vencida, $628.500 en riesgo', texto:'176 unidades de 5 modelos sin ninguna venta. Con el cierre de temporada de verano, el valor de estos productos seguirá cayendo. Recomendación: liquidar de inmediato antes de perder mayor valor comercial.'},
-  {tipo:'red', titulo:'Solo el 27% de los productos con stock están vendiendo', texto:'126 de 470 productos generaron al menos una venta. Los 353 restantes con stock disponible no tuvieron movimiento. Revisar exhibición, pricing y mix de temporada.'},
-  {tipo:'amber', titulo:'Canguro Juna Rayado — compra nueva sin venta aún', texto:'77 unidades compradas esta semana ($569.800) sin ninguna venta registrada. Monitorear durante la próxima semana. Si no genera movimiento, activar acción comercial preventiva.'},
-  {tipo:'amber', titulo:'Camisa Idrogeno MC Fibrana — 63 unidades sin venta', texto:'$378.000 inmovilizados en un proveedor fuerte. Siendo IDROGENO el proveedor con más ventas de la semana, este artículo llama la atención por su falta de movimiento. Revisar precio, exhibición o exceso de stock.'},
-  {tipo:'green', titulo:'IDROGENO es el proveedor estrella de la semana', texto:'MC Idrogeno Varias (24 und, $113.239 ganancia), Jeans Idrogeno (15 und, $84.874) y Canguro Idrogeno Hombre (10 und, $60.754). Mayor margen y rotación de la semana. Evaluar ampliar el surtido de este proveedor.'},
-  {tipo:'green', titulo:'SONIA y YOEL lideran en volumen de unidades', texto:'Calza Sonia Estampada Termica (32 und), ML Lucio Nene Doble Estampa (38 und) y Manga Larga Yoel Nena (39 und). Las termales y las remeras ML de estas marcas son el motor de volumen. Asegurarse de mantener stock suficiente.'},
-  {tipo:'blue', titulo:'Margen general del 34,2% — saludable pero mejorable', texto:'El negocio opera con margen sano. Los rubros con mayor margen son Corbatas (53,8%), Slip (54,1%), Camisas MC (45,3%) y Accesorios (41,4%). Aumentar la participación de estos rubros podría mejorar el margen total.'},
+  {tipo:'green', titulo:'Semana excepcional — ingresos +226% respecto a la semana anterior', texto:'Se pasó de $4,69M a $15,32M en ingresos y de 511 a 1.481 unidades vendidas. El margen también mejoró levemente de 34,2% a 34,7%. La semana anterior era la primera del ciclo y probablemente corta; esta semana refleja el ritmo real del negocio.'},
+  {tipo:'green', titulo:'Conjunto Yoel Colegial Acetato — producto estrella de la semana', texto:'57 unidades vendidas con $429.862 de ganancia. Es el producto con mayor ganancia individual de la semana. Se compraron 100 unidades la semana pasada y ya se vendió el 54%. Evaluar reposición pronto.'},
+  {tipo:'green', titulo:'Sonia y Darlon lideran el volumen — proveedores clave', texto:'ML Sonia Termica Niño (102 und), Camiseta Sonia Adulto (53 und), Calza Sonia (65+48+45 und). Los productos Darlon nuevos (Pantalon Marcos, Palazzo Marcela, Buzo Yoel) también arrancaron muy bien en su primera semana. Priorizar reposición de Sonia.'},
+  {tipo:'green', titulo:'Las compras nuevas ya están rotando fuerte', texto:'De las 26 líneas compradas esta semana, al menos 10 ya registran ventas significativas. Campera Jimmy Plush (38 und), Canguro Jimmy Gastado (27 und), Palazzo Marcela Darlon Rayas (32 und). Excelente selección de productos.'},
+  {tipo:'amber', titulo:'Pecheras — segundo semana consecutiva sin ventas', texto:'$1,75M inmovilizados, 630 unidades, cero ventas por segunda semana seguida. La situación se agrava. Recomendación urgente: definir precio de liquidación y activar acción comercial esta semana.'},
+  {tipo:'amber', titulo:'Bermuda Moy Oferta — nuevo ingreso al ranking de inmovilizados', texto:'213 unidades con $745.500 inmovilizados, sin ninguna venta. Es el producto con mayor valor inmovilizado de la semana. Revisar urgente: ¿está siendo exhibido? ¿El precio es competitivo?'},
+  {tipo:'amber', titulo:'Pantalon Juna Cargo — stock crítico', texto:'Se vendieron 44 unidades esta semana (arrancó con stock de 70, quedaron solo 26). Al ritmo actual de ventas, en menos de una semana se queda sin stock. Evaluar reposición urgente.'},
+  {tipo:'red', titulo:'Babucha Juna Raya — riesgo de quiebre inminente', texto:'55 unidades vendidas esta semana, quedan solo 34 en stock. Es el 3er producto más vendido y puede quedarse sin stock en días. Contactar proveedor para reposición inmediata.'},
+  {tipo:'blue', titulo:'Inversión en compras casi 4x mayor que la semana anterior', texto:'Se invirtieron $13,1M en 26 líneas vs $3,3M la semana pasada. Muchas son líneas nuevas (Darlon, Roger, Osmar, Lourdes). Los primeros resultados son muy positivos. Monitorear las que aún no vendieron (Sweater Osmar, Babucha Roger, Jeans Carsami).'},
 ];
 
-// ---- RENDER RANK ----
+// RENDER RANK
 const maxV = topVentas[0].v;
 const rankEl = document.getElementById('rank-ventas');
 topVentas.forEach((p, i) => {
@@ -565,24 +371,19 @@ topVentas.forEach((p, i) => {
   const bc = margen >= 38 ? 'b-green' : margen >= 32 ? 'b-blue' : 'b-amber';
   rankEl.innerHTML += `<div class="rank-item">
     <span class="rank-num">${i+1}</span>
-    <div class="rank-name">
-      <strong>${p.prod}</strong>
-      <span>${p.rub}</span>
-    </div>
-    <div class="rank-bar-wrap">
-      <div class="rank-bar-bg"><div class="rank-bar-fill" style="width:${(p.v/maxV*100).toFixed(0)}%"></div></div>
-    </div>
+    <div class="rank-name"><strong>${p.prod}</strong><span>${p.rub}</span></div>
+    <div class="rank-bar-wrap"><div class="rank-bar-bg"><div class="rank-bar-fill" style="width:${(p.v/maxV*100).toFixed(0)}%"></div></div></div>
     <span class="rank-val">${p.v} und</span>
     <span class="badge ${bc}" style="margin-left:6px">${margen}%</span>
   </div>`;
 });
 
-// ---- RENDER RUBROS TABLE ----
+// RENDER RUBROS
 const rb = document.getElementById('rubros-body');
 rubros.forEach(r => {
   const margen = r.ing > 0 ? (r.gan/r.ing*100).toFixed(1) : null;
   let estado, bc;
-  if (!margen) { estado = 'Sin venta'; bc = 'b-red'; }
+  if (!margen || r.v === 0) { estado = 'Sin venta'; bc = 'b-red'; }
   else if (parseFloat(margen) >= 38) { estado = 'Excelente'; bc = 'b-green'; }
   else if (parseFloat(margen) >= 32) { estado = 'Bueno'; bc = 'b-blue'; }
   else { estado = 'Regular'; bc = 'b-amber'; }
@@ -593,31 +394,27 @@ rubros.forEach(r => {
     <td class="num">${r.v || '-'}</td>
     <td class="num">${r.ing > 0 ? fmtK(r.ing) : '-'}</td>
     <td class="num">${r.gan > 0 ? fmtK(r.gan) : '-'}</td>
-    <td class="num">
-      <span class="rubro-margen-bar"><span class="rubro-margen-fill" style="width:${Math.min(pct*2,100)}%;background:${barColor}"></span></span>
-      ${margen ? margen + '%' : '-'}
-    </td>
+    <td class="num"><span class="rubro-margen-bar"><span class="rubro-margen-fill" style="width:${Math.min(pct*2,100)}%;background:${barColor}"></span></span>${margen ? margen + '%' : '-'}</td>
     <td class="num">${r.stock.toLocaleString('es-AR')}</td>
     <td class="num">${fmtK(r.vs)}</td>
     <td><span class="badge ${bc}">${estado}</span></td>
   </tr>`;
 });
 
-// ---- RENDER COMPRAS ----
+// RENDER COMPRAS
 const cb = document.getElementById('compras-body');
 compras.forEach(p => {
   cb.innerHTML += `<tr>
     <td class="bold">${p.prod}</td>
     <td><span class="badge b-gray">${p.rub}</span></td>
     <td class="num bold">${p.comp}</td>
-    <td class="num">${p.vend}</td>
-    <td class="num">${p.sf}</td>
-    <td class="num">${fmt(p.inv)}</td>
+    <td class="num">${fmt(p.cu)}</td>
+    <td class="num">${fmt(p.total)}</td>
     <td><span class="badge ${p.sigc}">${p.sig}</span></td>
   </tr>`;
 });
 
-// ---- RENDER SIN MOV ----
+// RENDER SIN MOV
 const smb = document.getElementById('sinmov-body');
 sinVenta.forEach(p => {
   const urg = p.vi > 300000 ? 'b-red' : p.vi > 180000 ? 'b-amber' : 'b-gray';
@@ -633,63 +430,49 @@ sinVenta.forEach(p => {
   </tr>`;
 });
 
-// ---- RENDER ALERTAS ----
+// RENDER ALERTAS
 const ab = document.getElementById('alertas-body');
 alertas.forEach(a => {
-  ab.innerHTML += `<div class="alert alert-${a.tipo}">
-    <div class="alert-title">${a.titulo}</div>
-    <div class="alert-text">${a.texto}</div>
-  </div>`;
+  ab.innerHTML += `<div class="alert alert-${a.tipo}"><div class="alert-title">${a.titulo}</div><div class="alert-text">${a.texto}</div></div>`;
 });
 
-// ---- CHART RUBROS ----
-const top10 = rubros.filter(r => r.ing > 0).slice(0, 10);
-new Chart(document.getElementById('rubroChart'), {
+// CHART TENDENCIA
+new Chart(document.getElementById('tendenciaChart'), {
   type: 'bar',
   data: {
-    labels: top10.map(r => r.r.length > 12 ? r.r.slice(0,12)+'…' : r.r),
+    labels: ['Sem 1 (30/03)', 'Sem 2 (06/04)'],
     datasets: [
-      { label: 'Ingresos', data: top10.map(r => r.ing), backgroundColor: '#2B7CC4', borderRadius: 4, barPercentage: 0.65 },
-      { label: 'Ganancia', data: top10.map(r => r.gan), backgroundColor: '#639922', borderRadius: 4, barPercentage: 0.65 },
+      { label: 'Ingresos', data: [4694635, 15322312], backgroundColor: '#2B7CC4', borderRadius: 4, barPercentage: 0.5 },
+      { label: 'Ganancia', data: [1607392, 5317065], backgroundColor: '#639922', borderRadius: 4, barPercentage: 0.5 },
     ]
   },
   options: {
     responsive: true, maintainAspectRatio: false,
     plugins: { legend: { display: false } },
     scales: {
-      x: { ticks: { font: { size: 9, family: 'DM Sans' }, maxRotation: 40, autoSkip: false }, grid: { display: false } },
-      y: { ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K', font: { size: 9 } }, grid: { color: 'rgba(0,0,0,0.04)' } }
+      x: { ticks: { font: { size: 10 } }, grid: { display: false } },
+      y: { ticks: { callback: v => '$' + (v/1000000).toFixed(1) + 'M', font: { size: 9 } }, grid: { color: 'rgba(0,0,0,0.04)' } }
     }
   }
 });
 
-// ---- CHART PIE ----
-const pieData = [
-  { label: 'Remeras MC', v: 3018279 },
-  { label: 'Calzas', v: 3038938 },
-  { label: 'Remeras ML', v: 2730041 },
-  { label: 'Buzos', v: 2816031 },
-  { label: 'Jeans', v: 2278123 },
-  { label: 'Pecheras', v: 1757608 },
-  { label: 'Conjuntos', v: 1988818 },
-  { label: 'Resto', v: 33491544 - 3018279 - 3038938 - 2730041 - 2816031 - 2278123 - 1757608 - 1988818 },
-];
-new Chart(document.getElementById('stockPie'), {
-  type: 'doughnut',
+// CHART RUBROS
+const top10 = rubros.filter(r => r.ing > 0).slice(0, 10);
+new Chart(document.getElementById('rubroChart'), {
+  type: 'bar',
   data: {
-    labels: pieData.map(d => d.label),
-    datasets: [{
-      data: pieData.map(d => d.v),
-      backgroundColor: ['#2B7CC4','#639922','#3B5BA5','#C47F1A','#3B6D6B','#D94040','#8B5CA5','#9B998F'],
-      borderWidth: 2,
-      borderColor: '#fff',
-    }]
+    labels: top10.map(r => r.r.length > 11 ? r.r.slice(0,11)+'…' : r.r),
+    datasets: [
+      { label: 'Ingresos', data: top10.map(r => r.ing), backgroundColor: '#2B7CC4', borderRadius: 3, barPercentage: 0.65 },
+      { label: 'Ganancia', data: top10.map(r => r.gan), backgroundColor: '#639922', borderRadius: 3, barPercentage: 0.65 },
+    ]
   },
   options: {
     responsive: true, maintainAspectRatio: false,
-    plugins: {
-      legend: { position: 'right', labels: { font: { size: 10, family: 'DM Sans' }, boxWidth: 10, padding: 8 } },
-      tooltip: { callbacks: { label: ctx => ctx.label + ': ' + fmtK(ctx.raw) } }
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { ticks: { font: { size: 9 }, maxRotation: 40, autoSkip: false }, grid: { display: false } },
+      y: { ticks: { callback: v => '$' + (v/1000).toFixed(0) + 'K', font: { size: 9 } }, grid: { color: 'rgba(0,0,0,0.04)' } }
     }
   }
 });
